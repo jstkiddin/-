@@ -24,4 +24,4 @@ server.listen(3030, () => {
   console.log('server is running on http://localhost:3030')
 })
 
-app.use('/', router)
+app.use('/', router())
