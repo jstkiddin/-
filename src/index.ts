@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import compression from 'compression'
 import cors from 'cors'
 import router from './router'
+import serverless from 'serverless-http'
 
 const app = express()
 
@@ -17,11 +18,6 @@ app.use(
 app.use(compression())
 app.use(cookieParser())
 app.use(bodyParser.json())
+app.use('/.netlify/functions/api', router)
 
-const server = http.createServer(app)
-
-server.listen(3030, () => {
-  console.log('server is running on http://localhost:3030')
-})
-
-app.use('/', router)
+serverless(app)
